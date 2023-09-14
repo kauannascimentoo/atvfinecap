@@ -12,7 +12,7 @@
                         <th>CNPJ</th>
                         <th>Categoria</th>
                         <th>Stand</th>
-                        <th>Situação</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
@@ -21,11 +21,7 @@
                         <td>{{ reserva.cnpj }}</td>
                         <td>{{ reserva.categoria_empresa }}</td>
                         <td>{{ reserva.stand }}</td>
-                        {% if reserva.quitado %}
-                        <td>Quitado</td>
-                        {% else %}
-                        <td>Esperando Confirmação</td>
-                        {% endif %}
+
                     </tr>
                 </tbody>
         </div>
