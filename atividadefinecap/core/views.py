@@ -14,7 +14,7 @@ class ReservaCreateView(generic.CreateView):
     template_name = "reserva.html"
 
     def form_valid(self, form):
-        messages.success(self.request, "Reserva cadastrada!!")
+        messages.success(self.request, "Sua reserva cadastrada com sucesso")
         return super().form_valid(form)
 
 class ReservasListView(generic.ListView):
@@ -26,7 +26,7 @@ class ReservaDeleteView(generic.DeleteView):
     success_url = reverse_lazy("lista_reservas")
 
     def form_valid(self, form):
-        messages.warning(self.request, "Reserva cancelada!")
+        messages.warning(self.request, "Sua reserva foi cancelada")
         return super().form_valid(form)
 
 class ReservaUpdateView(generic.UpdateView):
@@ -36,7 +36,7 @@ class ReservaUpdateView(generic.UpdateView):
     template_name = "reserva.html"
 
     def form_valid(self, form):
-        messages.success(self.request, "Atualizado com sucesso!!")
+        messages.success(self.request, "Sua reserva foi atualizada com sucesso!!")
         return super().form_valid(form)
 
 
