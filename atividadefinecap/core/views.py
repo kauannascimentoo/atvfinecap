@@ -14,7 +14,7 @@ class ReservaCreateView(generic.CreateView):
     template_name = "reserva.html"
 
     def form_valid(self, form):
-        messages.success(self.request, "Sua reserva cadastrada com sucesso")
+        messages.success(self.request, "Sua reserva foi cadastrada com sucesso")
         return super().form_valid(form)
 
 class ReservasListView(generic.ListView):
@@ -36,7 +36,7 @@ class ReservaUpdateView(generic.UpdateView):
     template_name = "reserva.html"
 
     def form_valid(self, form):
-        messages.success(self.request, "Sua reserva foi atualizada com sucesso!!")
+        messages.success(self.request, "Sua reserva foi atualizada com sucesso")
         return super().form_valid(form)
 
 
