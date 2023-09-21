@@ -7,6 +7,9 @@ from django.contrib import messages
 # Create your views here.
 
 
+class HomeView(generic.TemplateView):
+    template_name = "index.html"
+
 class ReservaCreateView(generic.CreateView):
     model = Reserva
     form_class = ReservaForm
@@ -26,7 +29,7 @@ class ReservaDeleteView(generic.DeleteView):
     success_url = reverse_lazy("lista_reservas")
 
     def form_valid(self, form):
-        messages.warning(self.request, "Sua reserva foi cancelada")
+        messages.error(self.request, "Sua reserva foi cancelada")
         return super().form_valid(form)
 
 class ReservaUpdateView(generic.UpdateView):
