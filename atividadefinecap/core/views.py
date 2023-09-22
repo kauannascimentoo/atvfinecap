@@ -7,7 +7,7 @@ from django.contrib import messages
 # Create your views here.
 
 
-class HomeView(generic.TemplateView):
+class IndexHomeView(generic.TemplateView):
     template_name = "index.html"
 
     def get_context_data(self, **kwargs):
