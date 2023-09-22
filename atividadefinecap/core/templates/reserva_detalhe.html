@@ -12,6 +12,7 @@
                         <th>CNPJ</th>
                         <th>Categoria</th>
                         <th>Stand</th>
+                        <th>Quitação</th>
                         
                     </tr>
                 </thead>
@@ -21,6 +22,11 @@
                         <td>{{ reserva.cnpj }}</td>
                         <td>{{ reserva.categoria_empresa }}</td>
                         <td>{{ reserva.stand }}</td>
+                        {% if reserva.quitado %}
+                        <td>Quitado</td>
+                        {% else %}
+                        <td>Não quitado</td>
+                        {% endif %}
 
                     </tr>
                 </tbody>
