@@ -20,7 +20,7 @@ from core.views import *
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', HomeView.as_view(), name='index'),
+    path('', IndexHomeView.as_view(), name='index'),
     path('Criar_reservas/', ReservaCreateView.as_view(), name="reserva"),
     path('lista_reservas/', ReservasListView.as_view(), name='lista_reservas'),
     path('remover_reserva/<int:pk>/', ReservaDeleteView.as_view(), name="remover_reserva"),

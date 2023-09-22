@@ -10,6 +10,12 @@ from django.contrib import messages
 class HomeView(generic.TemplateView):
     template_name = "index.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["total_reserva"] = Reserva.objects.count()
+        return context
+    
+
 class ReservaCreateView(generic.CreateView):
     model = Reserva
     form_class = ReservaForm
@@ -29,7 +35,7 @@ class ReservaDeleteView(generic.DeleteView):
     success_url = reverse_lazy("lista_reservas")
 
     def form_valid(self, form):
-        messages.error(self.request, "Sua reserva foi cancelada")
+        messages.warning(self.request, "Sua reserva foi cancelada")
         return super().form_valid(form)
 
 class ReservaUpdateView(generic.UpdateView):
