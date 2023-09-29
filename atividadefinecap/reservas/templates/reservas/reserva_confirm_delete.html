@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 {% block main %}
+
+<style>
+.button {
+  color: white;
+  background-color: red;
+}
+</style>
+
 <h1>Definir Reserva</h1>
 <form method="post">
   <section class="form container-fluid p-5x">
@@ -7,7 +15,7 @@
     <p> Tem certeza que quer deletar a reserva "{{ object }}"?</p>
     {{ form }}
 </section>
-  <button type="submit">Confirmar</button>
+  <button class="button" type="submit">Confirmar</button>
 </form>
 
 {% endblock %}
