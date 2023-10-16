@@ -5,10 +5,11 @@ from django.contrib import messages
 from django.contrib.messages import views
 from .forms import StandForm
 from .models import Stand
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-class StandCreateView(generic.CreateView):
+class StandCreateView(LoginRequiredMixin, generic.CreateView):
     model = Stand
     form_class = StandForm
     success_url = reverse_lazy("stands:lista_stands")
@@ -17,13 +18,17 @@ class StandCreateView(generic.CreateView):
     def form_valid(self, form):
         messages.success(self.request, "Seu stand foi cadastrado")
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        print(form.errors)
+        return self.render_to_response(self.get_context_data(form=form))
 
-class StandListView(generic.ListView):
+class StandListView(LoginRequiredMixin, generic.ListView):
     model = Stand
     template_name = "lista_stands.html"
     paginate_by = 2
 
-class StandUpdateView(generic.UpdateView):
+class StandUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Stand
     form_class = StandForm
     success_url = reverse_lazy("stands:lista_stands")
@@ -33,7 +38,7 @@ class StandUpdateView(generic.UpdateView):
         messages.success(self.request, "Seu stand foi atualizado")
         return super().form_valid(form)
 
-class StandDeleteView(generic.DeleteView):
+class StandDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Stand
     success_url = reverse_lazy("stands:lista_stands")
     
@@ -41,6 +46,6 @@ class StandDeleteView(generic.DeleteView):
         messages.error(self.request, "Seu stand foi removido")
         return super().form_valid(form)
 
-class StandDetailView(generic.DetailView):
+class StandDetailView(LoginRequiredMixin, generic.DetailView):
     model = Stand
     template_name = "stand_detalhe.html" 

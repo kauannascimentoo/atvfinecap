@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% translate "Faça Login" %}{% endblock %}
+
+{% block main %}
+
+<div class="main-content pl-sm-3 mt-4 d-flex justify-content-center align-items-center">
+  <div class="col-md-6 col-lg-6 col-xl-6 col-12">
+    <h1 class="text-h1 text-center mb-4">{% translate "Bem-vindo de Volta!" %}</h1>
+    <form class="login-form" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_username">{% translate "Nome de Usuário ou Email:" %}</label>
+        <input type="text" name="login" class="form-control" placeholder="{% translate 'Digite seu nome de usuário ou email' %}" required>
+      </div>
+      <div class="form-group">
+        <label for="id_password">{% translate "Senha:" %}</label>
+        <input type="password" name="password" class="form-control" placeholder="{% translate 'Digite sua senha' %}" required>
+      </div>
+      <div class="form-group form-check">
+        <input class="form-check-input" type="checkbox" name="remember_me" id="remember_me">
+        <label class="form-check-label" for="remember_me">{% translate "Lembrar-me" %}</label>
+      </div>
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <button class="btn btn-custom btn-block" type="submit">{% translate "Entrar" %}</button>
+    </form>
+    <hr>
+    <p class="first-access-text text-center">
+      {% translate "Novo por aqui?" %} <a href="{% url 'account_signup' %}" style="text-decoration-line: none">{% translate "Cadastre-se Agora" %}</a>
+    </p>
+  </div>
+</div>
+
+{% endblock %}

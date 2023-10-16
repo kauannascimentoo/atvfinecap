@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="css/contato.css">
     <title>RESERVAS FINECAP 2023</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -11,58 +11,52 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-      
-<style>
+
+  <style>
 
 body {
-  font-family: "Lato", sans-serif;
+    overflow-x: hidden;
 }
 
-.sidenav {
-  height: 100%;
-  width: 160px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
+  </style>
 
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-}
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'core:index' %}">FINECAP 2023</a>
 
-.sidenav a:hover {
-  color: #f1f1f1;
-}
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'reservas:lista_reservas' %}">Reservas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'stands:lista_stands' %}">Stands</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Usuário
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    {% if user.is_authenticated %}
+                        <a class="dropdown-item" href="{% url 'account_logout' %}">Sair</a>
+                    {% else %}
+                        <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
+                        <a class="dropdown-item" href="{% url 'account_signup' %}">Cadastrar</a>
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
 
-main {
-  margin-left: 160px; /* Same as the width of the sidenav */
-  font-size: 24px; /* Increased text to enable scrolling */
-  padding: 0px 10px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
-</style>
-
-    <div class="sidenav">
-      <a href="{% url 'core:index' %}">Inicio</a>
-        <a href="{% url 'reservas:lista_reservas' %}">Reservas</a>
-        <a href="{% url 'stands:lista_stands' %}">Stands</a>
-      </div>
-<main>
 
     {% block main %}
     {% endblock %}
+
+
+</main> 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 {% block javascript %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -75,6 +69,5 @@ main {
   </script>
   
 {% endblock javascript %}
-</main>   
 </body>
 </html>

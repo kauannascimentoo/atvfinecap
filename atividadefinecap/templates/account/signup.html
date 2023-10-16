@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}{% trans "Registre-se Agora" %}{% endblock head_title %}
+
+{% block main %}
+
+<div class="main-content pl-sm-3 mt-4 d-flex justify-content-center align-items-center">
+  <div class="col-md-6 col-lg-6 col-xl-6 col-12">
+    {% include "layouts/alerts.html" %}
+    <h1 class="text-h1 text-center mb-4">{% trans "Crie sua Conta" %}</h1>
+    <form class="signup-form" method="POST" action="{% url 'account_signup' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="id_username">{% trans "Nome de Usuário:" %}</label>
+        <input type="text" name="username" class="form-control" id="id_username" placeholder="{% trans 'Escolha um nome de usuário único' %}" required>
+      </div>
+      <div class="form-group">
+        <label for="id_email">{% trans "Endereço de Email:" %}</label>
+        <input type="email" name="email" class="form-control" id="id_email" placeholder="{% trans 'Digite seu endereço de email' %}" required>
+      </div>
+      <div class="form-group">
+        <label for="id_password1">{% trans "Senha:" %}</label>
+        <input type="password" name="password1" class="form-control" id="id_password1" placeholder="{% trans 'Escolha uma senha segura' %}" required>
+      </div>
+      <div class="form-group">
+        <label for="id_password2">{% trans "Confirme sua Senha:" %}</label>
+        <input type="password" name="password2" class="form-control" id="id_password2" placeholder="{% trans 'Digite a senha novamente' %}" required>
+      </div>
+      {% if redirect_field_value %}
+      <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+      <div class="form-group mt-4">
+        <button class="btn btn-custom btn-block" type="submit">{% trans "Criar Conta" %}</button>
+      </div>
+    </form>
+    <p class="text-muted text-center mt-3">{% trans "Já tem uma conta? Faça login" %} <a href="{% url 'account_login' %}">{% trans "aqui" %}</a>.</p>
+  </div>
+</div>
+
+{% endblock %}
