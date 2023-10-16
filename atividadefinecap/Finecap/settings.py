@@ -99,7 +99,7 @@ WSGI_APPLICATION = "Finecap.wsgi.application"
 AUTH_USER_MODEL = "users.User"
 LOGIN_REDIRECT_URL = "core:index"
 ACCOUNT_ALLOW_REGISTRATION = True
-EMAIL_BACKEND = 'django.core.mail.backend.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUUNT_EMAIL_VERIFICATION = 'none'
 
 
