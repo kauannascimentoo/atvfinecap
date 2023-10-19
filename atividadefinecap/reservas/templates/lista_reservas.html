@@ -3,54 +3,66 @@
 {% block main %}
 <br>
 <br>
+
+<style>
+    main {
+        width: 70%;
+        margin: auto;
+    }
+</style>
+<main>
+<div class="text-center m-3">
     <h3 class="mt-3"> Lista das reservas</h3>
 
-  <a href="{% url 'reservas:reserva' %}" class="btn btn-success mb-3">Novo Cadastro</a>
+    <a href="{% url 'reservas:reserva' %}" class="btn btn-success mb-3">Novo Cadastro</a>
 
-  {% if messages %}
-<div class="messages">
-  {% for message in messages %}
-  
-  {% if messages.warning %}
-  <div class="alert alert-danger{{ message.tags }}">
-    {{ message }}
-  </div>
-  {% else %}
-  <div class="alert alert-{{ message.tags }}">
-    {{ message }}
-  </div>
-  {% endif %}
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
 
-  {% endfor %}
+        {% if messages.warning %}
+        <div class="alert alert-danger{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% else %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endif %}
+
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <table class="table table-bordered mx-auto">
+        <thead>
+            <tr>
+                <th>Empresa</th>
+                <th>Stand</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for object in object_list %}
+            <tr>
+                <td>{{ object.nome_empresa }}</td>
+                <td>{{ object.stand }}</td>
+                <td style="display: flex; justify-content: space-evenly;">
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons"></div>
+                    <a href="{% url 'reservas:editar' object.id %}" class="btn btn-info btn-sm">Editar</a>
+                    <a href="{% url 'reservas:reserva_detalhe' object.id %}" class="btn btn-primary btn-sm">Detalhar</a>
+                    <a href="{% url 'reservas:remover_reserva' object.id %}" class="btn btn-danger btn-sm">Remover</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
-{% endif %}
-
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Empresa</th>
-        <th>Stand</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-        
-      {% for object in object_list %}  
-      <tr>
-        <td>{{ object.nome_empresa }}</td>
-        <td>{{ object.stand }}</td>
-        <td style="display: flex; justify-content: space-evenly;">
-          <div class="btn-group btn-group-toggle" data-toggle="buttons"></div>
-          <a href="{% url 'reservas:editar' object.id %}" class="btn btn-info btn-sm">Editar</a>
-          <a href="{% url 'reservas:reserva_detalhe' object.id %}" class="btn btn-primary btn-sm">Detalhar</a>
-          <a href="{% url 'reservas:remover_reserva' object.id %}" class="btn btn-danger btn-sm">Remover</a>
-        </td>
-      </tr>
-
-      {% endfor %}
-
-    </tbody>
-  </table>
+</tbody>
+</table>
+</main>
 
   <div class="container">
     <div class="row">
