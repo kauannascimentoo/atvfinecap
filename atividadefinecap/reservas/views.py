@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages import views
 from django.contrib.auth.mixins import LoginRequiredMixin
+from users.permissions import GerentePermission
 
 class ReservaCreateView(LoginRequiredMixin, generic.CreateView):
     model = Reserva
@@ -23,7 +24,7 @@ class ReservasListView(LoginRequiredMixin, generic.ListView):
     template_name = "lista_reservas.html"
     paginate_by = 2
 
-class ReservaDeleteView(LoginRequiredMixin, generic.DeleteView):
+class ReservaDeleteView(GerentePermission, LoginRequiredMixin, generic.DeleteView):
     model = Reserva
     success_url = reverse_lazy("reservas:lista_reservas")
 
@@ -31,7 +32,7 @@ class ReservaDeleteView(LoginRequiredMixin, generic.DeleteView):
         messages.error(self.request, "Sua reserva foi cancelada")
         return super().form_valid(form)
   
-class ReservaUpdateView(LoginRequiredMixin, generic.UpdateView):
+class ReservaUpdateView(GerentePermission, LoginRequiredMixin, generic.UpdateView):
     model = Reserva
     form_class = ReservaForm
     success_url = reverse_lazy("reservas:lista_reservas")
